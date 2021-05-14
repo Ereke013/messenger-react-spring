@@ -1,0 +1,11 @@
+.users__admin{
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 2%;
+    width: 100%;
+}
+
+.backcolorBlack{
+    background-color: #212328;
+    color: #767676;
+}

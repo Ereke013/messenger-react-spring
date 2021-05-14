@@ -1,0 +1,53 @@
+
+.messages{
+    /*box-shadow: 10px 20px 50px #00d2c6,*/
+    /*-30px -30px 60px #00ffff;*/
+    /*min-height: 45vh;*/
+    background-color: white;
+}
+
+.message__Link{
+    display: flex;
+}
+.messages__text{
+    min-width: 80%;
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 0% 0% -1% 1%;
+    /*text-overflow: ellipsis;*/
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.messages__text>p{
+    color: black;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.card__body_text{
+    box-shadow: 6px 6px 14px 0 rgba(0, 0, 0, 0.2),
+    -8px -8px 18px 0 rgba(255, 255, 255, 0.55);
+}
+
+.message__Link2:hover{
+    background-color: #cccccc;
+}
+
+.messages__date{
+    /*background-color: #2e81f4;*/
+    float: right;
+    color: red;
+    width: 19vh;
+    /*align-items: center;*/
+    text-align: right;
+    margin: 4% 1% 0 0;
+}
+
+
+.messages__date>label{
+    color: #767676;
+}

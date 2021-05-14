@@ -1,0 +1,33 @@
+.logiin {
+  /* box-shadow: 1px 2px 3px 3px black; */
+  background: #fff;
+  border-radius: 6px;
+  /* position: relative; */
+  /* background-color: rgb(83, 165, 1); */
+  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+    0 15px 12px rgba(0, 0, 0, 0.22);
+  /* -moz-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), */
+  /* 0 15px 12px rgba(0, 0, 0, 0.22); */
+  /* -ms-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3); */
+  /* 0 15px 12px rgba(0, 0, 0, 0.22); */
+  /* -o-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); */
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.login .list-group-item {
+  /* padding: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem; */
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+
+  border: 1px solid rgb(218, 159, 83);
+  border-left-width: 0.25rem;
+
+  border-radius: 0.25rem;
+}
+
+.login {
+  margin-top: 10%;
+}

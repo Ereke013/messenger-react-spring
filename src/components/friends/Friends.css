@@ -1,0 +1,135 @@
+.friends__page{
+    display: flex;
+}
+
+.ffrien{
+    display: flex;
+    flex-direction: column;
+}
+
+.friends__request{
+    background-color: #24282d;
+    border-radius: 20px;
+}
+
+.friends__request__title{
+    background-color: #2f3239;
+    padding: 1%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.friends__request__title>h2{
+    color: white;
+}
+
+.friends{
+    width: 100vh;
+    background-color: #ffffff;
+    padding-bottom: 2%;
+}
+
+.friends__input {
+    margin: 3% 3%;
+    display: flex;
+    align-items: center;
+    background-color: #eff2f5;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 99px;
+}
+.friends__input > input {
+    border: none;
+    background-color: transparent;
+    outline-width: 0;
+}
+
+.friends__list__one{
+    display: flex;
+    margin: 3% 2%;
+    padding: 2% 2%;
+    box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+    inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+    color: #5ab9ea;
+}
+
+
+.recommended__list__fr{
+    display: flex;
+    margin: 3% 2%;
+    padding: 2% 2%;
+
+    background: #DAD299;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #B0DAB9, #DAD299);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #B0DAB9, #DAD299); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    /*box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2),*/
+    /*-12px -12px 24px 0 rgba(255, 255, 255, 0.5);*/
+
+
+    color: #5ab9ea;
+}
+
+.recommended__list__fr>img{
+    width: 8vh;
+    border-radius: 50%;
+}
+
+.friends__image{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.friends__image>img{
+    display: inline;
+    margin: 0 auto;
+    margin-left: -25%; /*//centers the image*/
+height: 100%;
+    width: auto;
+    /*width: 15vh;*/
+    /*border-radius: 40%;*/
+    /*-webkit-border-radius: 20%;*/
+    /*object-fit: contain;*/
+
+}
+
+.friends__list__info{
+    margin: 1% 2%;
+    width: 70%;
+}
+
+.btn__rec:hover{
+    color: #203388;
+}
+
+.info__text{
+    font-size: 25px;
+    /*background: -webkit-linear-gradient(black, blue);*/
+    /*-webkit-background-clip: text;*/
+    /*-webkit-text-fill-color: transparent;*/
+}
+
+.accept__link{
+    background-color: #33373e;
+    padding: 2%;
+    color: #9999d0;
+    border-radius: 10px;
+    width: 48%;
+}
+.accept__link:hover{
+    color: white;
+}
+
+.list__recommend{
+    margin-left: 1vh;
+    /*background-color: white;*/
+    background-color: #212328;
+    max-height: 58vh;
+    /*background: #abbaab;  !* fallback for old browsers *!*/
+    /*background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: linear-gradient(to right, #ffffff, #abbaab); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+
+}

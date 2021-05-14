@@ -1,0 +1,35 @@
+.float__right {
+  float: right;
+}
+
+.welcome {
+  width: 80%;
+  margin: 0% 10%;
+}
+
+.wel {
+  /* background: url("https://i.pinimg.com/originals/3b/8a/d2/3b8ad2c7b1be2caf24321c852103598a.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 90vh; */
+  margin-bottom: 0 auto;
+  padding-top: 10%;
+}
+
+.task {
+  background: #fff;
+  border-radius: 6px;
+  /* position: relative; */
+  /* background-color: rgb(83, 165, 1); */
+  -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3),
+    0 15px 12px rgba(0, 0, 0, 0.22);
+  /* -moz-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), */
+  /* 0 15px 12px rgba(0, 0, 0, 0.22); */
+  /* -ms-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3); */
+  /* 0 15px 12px rgba(0, 0, 0, 0.22); */
+  /* -o-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22); */
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}

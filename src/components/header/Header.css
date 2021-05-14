@@ -1,0 +1,27 @@
+.headerr {
+  /* padding: 10px 60px; */
+  background-color: dodgerblue;
+  /* position: fixed; */
+  position: sticky;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  /* display: flex; */
+}
+
+.header__logo {
+  width: 100px;
+  object-fit: contain;
+  margin-left: 20px;
+  margin-right: 20px;
+  /* margin: 0 20px; */
+  /* margin-top: 18px; */
+}
+
+.headerr__button {
+  color: white;
+}
+
+.headerr__button:hover {
+  color: black;
+}
