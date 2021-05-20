@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 // import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Profile.css";
@@ -8,11 +8,44 @@ import {Link} from "react-router-dom";
 import Feed from "../feed/Feed";
 import MessageSender from "../feed/messageSender/MessageSender";
 import Post from "../feed/post/Post";
+import axios from "../../axios";
+import {Button, Modal} from "react-bootstrap";
+import requests from "../../request";
+import {updateNameAuthAction} from "../../redux/actions/AuthAction";
 
 function Profile(props) {
-    const { auth} = props;
-    // localStorage.removeItem("currentPage");
-    // localStorage.setItem("currentPage", "/profile");
+    const { auth, updateName} = props;
+    const [currentUser, setCurrentUser] = useState({});
+    const [userToEdit, setUserToEdit] = useState({
+        id: 0,
+        fullName:"",
+        ava:"",
+        email:"",
+        password:"",
+        roles:[]
+    });
+    const [isBuild, setIsBuild] = useState(false);
+
+    useEffect(()=>{
+        async function fetchData(){
+            const request = await axios.get("/api/allUsers/"+auth?.user.id);
+            setCurrentUser(request.data);
+            console.log("request2");
+            console.log(request.data);
+        }
+        fetchData();
+    },[isBuild]);
+
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => {
+        setShow2(false);
+    }
+    const handleShow2 = () => {
+        setShow2(true);
+    }
+
+    const[password, setPassword] = useState("");
+
   return (
     <div className="profile">
         {/*<div className="container">*/}
@@ -21,31 +54,81 @@ function Profile(props) {
                     <div className="card profile">
                         <div className="row mt-2">
                             <div className="col-3">
-                                <img src={auth?.user.ava} alt="" className="profile__image"/>
+                                <img src={auth.user.ava} alt="" className="profile__image"/>
                             </div>
                             <div className="col-8">
-                                <h3 className="profile__fullname">{auth?.user.fullName}</h3>
-                                <h5>Email: {auth?.user.email}</h5>
-                                <Link to={`/profile/:userId`} style={{textDecoration:"none"}}>
-                                    Edit profile
-                                </Link>
+                                <h3 className="profile__fullname">{auth.user.fullName}</h3>
+                                <h5>Email: {auth.user.email}</h5>
+                                {/*<Link to={`/profile/:userId`} style={{textDecoration:"none"}}>*/}
+                                {/*    Edit profile*/}
+                                {/*</Link>*/}
+                                <button className="btn" onClick={(e)=>{
+                                    setUserToEdit({...userToEdit, id:currentUser.id, fullName: currentUser.fullName, email: currentUser.email, ava: currentUser.ava, roles: currentUser.roles, password:currentUser.password});
+                                    handleShow2();
+                                }}>Edit profile</button>
                             </div>
                         </div>
                         <hr/>
-                        {/*<div className="profile__sendPost">*/}
-                        {/*    <h2 style={{textAlign:"center"}}>Send Posts</h2>*/}
-                        {/*    <MessageSender />*/}
-                        {/*</div>*/}
 
-                        <hr/>
-                        {/*<Post*/}
-                        {/*    profilePic="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png"*/}
-                        {/*    username="Test"*/}
-                        {/*    image="https://static10.tgstat.ru/channels/_0/66/66de8dadec5fa9d4dbcc0a4beb1cfcf5.jpg"*/}
-                        {/*    message="Football Legend!🔥"*/}
-                        {/*/>*/}
 
                     </div>
+        {/*edit modal*/}
+        <Modal show={show2} onHide={handleClose2}>
+            <Modal.Header closeButton className="backcolorBlack">
+                <Modal.Title>Edit Message</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="backcolorBlack">
+                <form>
+                    <div className="form-group">
+                        <label>[Full Name]:</label>
+                        <input type="text" className="form-control" placeholder="User Full Name..."
+                               value={userToEdit.fullName} onChange={(e)=>{
+                                   setUserToEdit({...userToEdit, fullName: e.target.value})
+                        }} />
+                    </div>
+                    <div className="form-group">
+                        <label> Ava Picture:</label>
+                        <input type="text" className="form-control" placeholder="Ava picture url..."
+                               value={userToEdit.ava} onChange={(e)=>{
+                            setUserToEdit({...userToEdit, ava: e.target.value})
+                        }} />
+                    </div>
+                    <div className="form-group">
+                        <label> Email:</label>
+                        <input type="email" className="form-control" placeholder="Email..."
+                               value={userToEdit.email} onChange={(e)=>{
+                            setUserToEdit({...userToEdit, email: e.target.value})
+                        }} />
+                    </div>
+                    {/*<div className="form-group">*/}
+                    {/*    <label>New Password:</label>*/}
+                    {/*    <input type="password" className="form-control" placeholder="password..."*/}
+                    {/*         value={userToEdit.password} onChange={(e)=>{*/}
+                    {/*        setUserToEdit({...userToEdit, password: e.target.value});*/}
+                    {/*    }}  />*/}
+                    {/*</div>*/}
+                </form>
+            </Modal.Body>
+            <Modal.Footer className="backcolorBlack">
+                <Button variant="danger" onClick={handleClose2}>
+                    Cancel
+                </Button>
+                <Button variant="primary" onClick={() => {
+                    console.log("friend To Edit");
+                    console.log(userToEdit);
+
+                    // axios.put(requests.updateUser, userToEdit).then(res=>{
+                    //     setIsBuild(!isBuild);
+
+                    // })
+                    updateName(userToEdit);
+                    handleClose2();
+                }}>
+                    Update
+                </Button>
+            </Modal.Footer>
+        </Modal>
+        {/*end edit modal*/}
         <div className="mt-3">
             <Feed email={auth?.user.email} sourc={"userNews"}/>
         </div>
@@ -63,4 +146,11 @@ const mapStateToProps = (state) => {
         auth: state.authState,
     };
 };
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateName: (userInfo) => {
+            dispatch(updateNameAuthAction(userInfo));
+        },
+    };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

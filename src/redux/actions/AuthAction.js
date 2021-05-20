@@ -9,6 +9,8 @@ const AuthActionType = {
   LOGOUT_FAIL: "LOGOUT_FAIL",
   LOGIN_SUCCESS: "LOGIN_SUCCESS",
   LOGIN_FAIL: "LOGIN_FAIL",
+  UPDATE_PROFILE_SUCCESS: "UPDATE_PROFILE_SUCCESS",
+  UPDATE_PROFILE_FAIL: "UPDATE_PROFILE_FAIL"
 };
 
 const RegisterAuthAction = (userState, history, setErrorHandler) => {
@@ -79,9 +81,38 @@ const LogOutAuthAction = (history) => {
   };
 };
 
+const updateNameAuthAction = (updateUserState) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.put(requests.updateUser, updateUserState);
+
+      // const jwtToken = res.data.jwtToken;
+      // axios.defaults.headers.common["Authentication"] = `Bearer ${jwtToken}`;
+      // const profileRes = axios.get(requests.profile);
+      const data = res.data;
+      console.log(data);
+      const updatedProfile = {email:data.email,
+        fullName:data.fullName,
+
+        ava:data.ava};
+      console.log("HERE", updatedProfile);
+
+      dispatch({
+        type: AuthActionType.UPDATE_PROFILE_SUCCESS,
+        payload:  updatedProfile ,
+      });
+      // history.push("/");
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: AuthActionType.UPDATE_PROFILE_FAIL, payload: {} });
+    }
+  };
+};
+
 export {
   RegisterAuthAction,
   AuthActionType,
   LogOutAuthAction,
   LoginAuthAction,
+  updateNameAuthAction
 };

@@ -1,11 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Messages.css";
 import {Link} from "react-router-dom";
 import {Avatar} from "@material-ui/core";
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import {LogOutAuthAction} from "../../redux/actions/AuthAction";
+import {connect} from "react-redux";
+import axios from "../../axios";
+import requests from "../../request";
 
-function Messages() {
+function Messages(props) {
     // localStorage.setItem("currentPage", "/messages");
+    const { auth} = props;
+    const [messages, setMessages]=useState([]);
+    const [isSend, setSend]=useState(false);
+    useEffect(()=>{
+        async function fetchData(){
+            const request = await axios.get("/api/usermessages/"+auth?.user.email);
+            setMessages(request.data);
+            console.log("mm");
+            console.log(request.data);
+        }
+        fetchData();
+        // const interval = setInterval(() => {
+        //     console.log('This will run every second!');
+        //
+        // }, 2000);
+        // return () => clearInterval(interval);
+
+    },[isSend])
+    console.log("messages");
+    console.log(messages);
     return (
         <div className="messages">
             <div className="card bg-light" >
@@ -15,44 +39,48 @@ function Messages() {
                 <div className="card-body" style={{background:"transparent"}}>
                     <div className="card__body_text">
                         <ul className="list-group list-group-flush">
-                            <Link className="list-group-item message__Link2" style={{textDecoration:"none"}}>
-                                <div className="message__Link">
-                                    <Avatar src="https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png" style={{marginTop:"1%"}}/>
-                                    <div className="messages__text">
-                                        <label>User Userov</label>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                                    </div>
-                                    <div className="messages__date">
-                                        <label>09.04.2021</label>
-                                    </div>
-                                </div>
-                            </Link>
+                            {
+                                messages.length>0?
+                                    messages.map((message)=>{
+                                        console.log("mssg")
+                                        console.log(message)
+                                    return(
+                                        <Link className="list-group-item message__Link2" style={{textDecoration:"none"}} to="/meeee">
+                                            <div className="message__Link">
+                                                <Avatar src={auth.user.email=== message.friend.email?message.user.ava : message.friend.ava} style={{marginTop:"1%"}}/>
+                                                <div className="messages__text">
 
-                            <Link className="list-group-item message__Link2" style={{textDecoration:"none"}}>
-                                <div className="message__Link">
-                                    <Avatar src="https://img.icons8.com/color/452/avatar.png" style={{marginTop:"1%"}}/>
-                                    <div className="messages__text">
-                                        <label>Test User</label>
-                                        <p>The element will then take up the specified width, and the remaining space will be split equally between the two margins </p>
-                                    </div>
-                                    <div className="messages__date">
-                                        <label>09.04.2021</label>
-                                    </div>
-                                </div>
-                            </Link>
+                                                    {
+                                                        auth.user.email=== message.friend.email?
+                                                            <>
 
-                            <Link className="list-group-item message__Link2" style={{textDecoration:"none"}}>
-                                <div className="message__Link">
-                                    <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgLZal2ngrRXdEebFSXKENv_Joj38zpGXhwA&usqp=CAU" style={{marginTop:"1%"}}/>
-                                    <div className="messages__text">
-                                        <label>Halo Malo</label>
-                                        <p>To just center the text inside an element, use . </p>
-                                    </div>
-                                    <div className="messages__date">
-                                        <label>09.04.2021</label>
-                                    </div>
-                                </div>
-                            </Link>
+                                                                <label> {message.user.fullName}</label>
+                                                            </>
+                                                            :
+                                                            <>
+                                                                {console.log("ten")}
+                                                                {message.friend.fullName}
+                                                            </>
+
+                                                    }
+
+                                                    <p>{message.message_text} </p>
+                                                </div>
+                                                <div className="messages__date">
+                                                    <label>09.04.2021</label>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    );
+
+                            })
+
+
+                                    :
+                                    <h2 style={{textAlign:"center"}}>No messages</h2>
+
+                            }
+
                         </ul>
                     </div>
 
@@ -62,4 +90,11 @@ function Messages() {
     );
 }
 
-export default Messages;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.authState,
+    };
+};
+
+
+export default connect(mapStateToProps)(Messages);

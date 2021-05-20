@@ -19,7 +19,7 @@
     border-top-right-radius: 20px;
 }
 
-.friends__request__title>h2{
+.friends__request__title>h3{
     color: white;
 }
 
@@ -117,10 +117,21 @@ height: 100%;
     padding: 2%;
     color: #9999d0;
     border-radius: 10px;
-    width: 48%;
+    /*width: 48%;*/
 }
 .accept__link:hover{
     color: white;
+}
+
+.accept__link2{
+    background-color: rgba(222, 30, 7, 0.88);
+    padding: 2%;
+    color: white;
+    border-radius: 10px;
+    /*width: 48%;*/
+}
+.accept__link2:hover{
+    color: darkgrey;
 }
 
 .list__recommend{

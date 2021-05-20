@@ -9,13 +9,15 @@ import {
 import { connect } from "react-redux";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import axios from "axios";
+import requests from "../../request";
 
 // import { useStateValue } from "../../state/Provider";
 
 function Sidebar(props) {
   // const [{ user }, dispatch] = useStateValue();
   const { auth, logout, errorHandler } = props;
-  console.log("user h: ", auth);
+  console.log("user h: ", auth.user.id);
   return (
     <div className="card" style={{width:"100%", height:"100%"}}>
         <div className="card-body">

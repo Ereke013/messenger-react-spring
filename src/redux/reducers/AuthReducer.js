@@ -65,6 +65,35 @@ const authreducer = (state = newAuth, action) => {
       localStorage.setItem("timeJWT", Date.now());
       return loginAuthState;
 
+
+    case AuthActionType.UPDATE_PROFILE_SUCCESS:
+      const profileUpdate = {
+        isLoggedIn: true,
+        user: {
+          id:state.user.id,
+
+          password:state.user.password,
+
+          roles:state.user.roles,
+
+          email:action.payload.email,
+          fullName: action.payload.fullName,
+          ava:action.payload.ava,
+
+          jwtToken: state.user.jwtToken,
+
+        },
+      };
+
+      // localStorage.setItem("auth", JSON.stringify(profileUpdate));
+      const authStateLocal = JSON.parse(localStorage.getItem("auth"));
+      authStateLocal.user = profileUpdate.user;
+      localStorage.setItem("auth", JSON.stringify(authStateLocal));
+      // return profileUpdate;
+      return profileUpdate;
+
+    case AuthActionType.UPDATE_PROFILE_FAIL:
+      return profileUpdate;
     default:
       return state;
   }

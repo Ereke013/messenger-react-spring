@@ -1,5 +1,5 @@
 import { Avatar } from "@material-ui/core";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -11,11 +11,23 @@ import {
 import eeImg from "../../images/phone.png";
 import { LogOutAuthAction } from "../../redux/actions/AuthAction";
 import "./Header.css";
+import axios from "../../axios";
 
 function Header(props) {
   const { auth, logout, errorHandler } = props;
   const history = useHistory();
   console.log(auth.user.roles);
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(()=>{
+    async function fetchData(){
+      const request = await axios.get("/api/allUsers/"+auth?.user.id);
+      setCurrentUser(request.data);
+      console.log("requestheaders");
+      console.log(request.data);
+    }
+    fetchData();
+  },[]);
   return (
     <div className="headerr">
       <nav className="navbar navbar-expand-lg navbar-dark nav_bg_color ">
@@ -46,7 +58,7 @@ function Header(props) {
                 // </ul>
                 <>
                   {/* <ul className="navbar-nav"> */}
-                  {auth?.user.roles.find(o => o.role === 'ROLE_ADMIN')?
+                  {auth?.user?.roles?.find(o => o.role === 'ROLE_ADMIN')?
                       (<li className="nav-item active">
 
                         <Link className="nav-link d-flex" to="/admin">
@@ -57,7 +69,7 @@ function Header(props) {
 
                   <li className="nav-item active">
                     <Link className="nav-link d-flex" to="/profile">
-                      {auth?.user.fullName}
+                      {auth.user.fullName}
                       {/* <span className="sr-only">(current)</span> */}
                     </Link>
                   </li>

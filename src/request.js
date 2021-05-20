@@ -19,7 +19,7 @@ const requests = {
   updatePassword: `/api/updatepassword`,
   addPost: `/api/addPost`,
   news: `/api/news`,
-  getUserNews: `/api/news/`,
+  getUserNews: `/api/getusernews/`,
   myfriends: `/api/myfriends/`,
   recommendfriends: `/api/recommendFriends/`,
   addFriendReques: `/api/addfriendrequest`,
@@ -35,6 +35,7 @@ const requests = {
   getAllFriends: `/api/friends`,
   getFriendsById: `/api/friends/`,
   deleteFriends: `/api/deleteFriend/`,
+  zaprosNafriend:`/api/friendreceiveform/`,
 
   //messages
   addMessage: `/api/addMessage`,
